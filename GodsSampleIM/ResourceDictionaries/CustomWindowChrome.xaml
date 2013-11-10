@@ -1,0 +1,124 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    x:Class="GodsSampleIM.CustomWindowChrome">
+    <Style x:Key="CloseButton" TargetType="{x:Type Button}">
+        <Setter Property="OverridesDefaultStyle" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Border BorderThickness="1,0,0,0">
+                        <Border.BorderBrush>
+                            <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                <GradientStop Color="#50000000" Offset="0.15"/>
+                                <GradientStop Color="#00000000" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.BorderBrush>
+                        <Grid Width="30" Height="18">
+                            <Grid x:Name="PN" Opacity="0">
+                                <Grid.Background>
+                                    <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                                        <GradientStop Color="#EEFF5200" Offset="0.25"/>
+                                        <GradientStop Color="#00FF5200" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <Border BorderBrush="#60FFFFFF" BorderThickness="1,1,1,0"/>
+                            </Grid>
+                            <Canvas Width="15" Height="16" HorizontalAlignment="Center">
+                                <Line X1="3" Y1="5" X2="12" Y2="13" Stroke="White" StrokeThickness="2"></Line>
+                                <Line X1="12" Y1="5" X2="3" Y2="13" Stroke="White" StrokeThickness="2"></Line>
+                                <Canvas.RenderTransform>
+                                    <TranslateTransform x:Name="CANVAS_TRANS" X="0" Y="0"></TranslateTransform>
+                                </Canvas.RenderTransform>
+                            </Canvas>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <EventTrigger RoutedEvent="MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="CANVAS_TRANS" Storyboard.TargetProperty="Y" To="-1" Duration="0:0:0.1"/>
+                                    <DoubleAnimation Storyboard.TargetName="PN" Storyboard.TargetProperty="Opacity" To="1" Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Storyboard.TargetName="CANVAS_TRANS" Storyboard.TargetProperty="Y" Duration="0:0:0.1"/>
+                                    <DoubleAnimation Storyboard.TargetName="PN" Storyboard.TargetProperty="Opacity" Duration="0:0:0.1"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style x:Key="CustomWindowChrome" TargetType="{x:Type Window}">
+        <Setter Property="AllowsTransparency" Value="True"></Setter>
+        <Setter Property="WindowStyle" Value="None"></Setter>
+        <Setter Property="Background" Value="Transparent"></Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border CornerRadius="1" BorderBrush="#FF2E2E2E" BorderThickness="1">
+                        <Grid>
+                            <Grid MouseLeftButtonDown="mainPanel_MouseLeftButtonDown">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Border Grid.RowSpan="2" Grid.ColumnSpan="2">
+                                    <AdornerDecorator>
+                                        <ContentPresenter/>
+                                    </AdornerDecorator>
+                                </Border>
+                                <Rectangle Height="1" VerticalAlignment="Top" Fill="#50FFFFFF" Grid.ColumnSpan="2"/>
+                                <TextBlock Text="{TemplateBinding Title}" VerticalAlignment="Center" Margin="10,3,0,0" Foreground="White" FontWeight="Bold" FontSize="10"/>
+                                <Button Grid.Column="1" Style="{StaticResource CloseButton}" VerticalAlignment="Top" Click="buttonClose_OnClick"/>
+                            </Grid>
+                            <!--Top-->
+                            <Rectangle Cursor="SizeNS" Fill="Transparent" Height="3" VerticalAlignment="Top"
+                                       MouseLeftButtonDown="window_top_resize" MouseMove="window_resize" MouseLeftButtonUp="window_endResize"/>
+
+                            <!--Bottom-->
+                            <Rectangle Cursor="SizeNS" Fill="Transparent" Height="3" VerticalAlignment="Bottom"
+                                       MouseLeftButtonDown="window_bottom_resize" MouseMove="window_resize" MouseLeftButtonUp="window_endResize"/>
+
+                            <!--Left-->
+                            <Rectangle Cursor="SizeWE" Fill="Transparent" Width="3" HorizontalAlignment="Left"
+                                       MouseLeftButtonDown="window_left_resize" MouseMove="window_resize" MouseLeftButtonUp="window_endResize"/>
+
+                            <!--Right-->
+                            <Rectangle Cursor="SizeWE" Fill="Transparent" Width="3" HorizontalAlignment="Right"
+                                       MouseLeftButtonDown="window_right_resize" MouseMove="window_resize" MouseLeftButtonUp="window_endResize"/>
+
+                            <!--TopLeft-->
+                            <Rectangle Cursor="SizeNWSE"  Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Left"
+                                       MouseLeftButtonDown="window_topLeft_resize" MouseMove="window_resize" MouseLeftButtonUp="window_endResize"/>
+
+                            <!--BottomRight-->
+                            <Rectangle Cursor="SizeNWSE"  Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Right"
+                                       MouseLeftButtonDown="window_bottomRight_resize" MouseMove="window_resize" MouseLeftButtonUp="window_endResize"/>
+
+                            <!--TopRight-->
+                            <Rectangle Cursor="SizeNESW"  Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Right"
+                                       MouseLeftButtonDown="window_topRight_resize" MouseMove="window_resize" MouseLeftButtonUp="window_endResize"/>
+
+                            <!--BottomLeft-->
+                            <Rectangle Cursor="SizeNESW"  Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Left"
+                                       MouseLeftButtonDown="window_bottomLeft_resize" MouseMove="window_resize" MouseLeftButtonUp="window_endResize"/>
+
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

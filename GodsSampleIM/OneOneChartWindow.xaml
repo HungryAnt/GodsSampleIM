@@ -1,0 +1,79 @@
+﻿<Window x:Class="GodsSampleIM.OneOneChartWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="" Height="472" Width="534"
+        Style="{StaticResource CustomWindowChrome}">
+    <!--Style="{StaticResource CustomWindowChrome}"-->
+    <Grid>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                <GradientStop Color="#FF3B96CB" Offset="0" />
+                <GradientStop Color="#FF7FC4EF" Offset="1" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10"></RowDefinition>
+            <RowDefinition Height="65" />
+            <RowDefinition Height="35" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="3"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Ellipse Width="12" Height="12" Stroke="GreenYellow" Fill="#FF56CF0C" Margin="5,0,0,0"></Ellipse>
+            <TextBlock Grid.Column="1" Text="{Binding Path=Name}" Margin="5,0,0,0"/>
+            <TextBlock Grid.Row="2" Grid.Column="1" Text="{Binding Path=Description}"/>
+        </Grid>
+        <Grid Grid.Row="3" HorizontalAlignment="Stretch" Name="grid1" VerticalAlignment="Stretch">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="327*" />
+                <ColumnDefinition Width="117*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="144*" />
+                <RowDefinition Height="23*" />
+                <RowDefinition Height="49*" />
+                <RowDefinition Height="23*" />
+            </Grid.RowDefinitions>
+            <TextBox HorizontalAlignment="Stretch" Name="textBox1" VerticalAlignment="Stretch" TextWrapping="Wrap">
+                <TextBox.Background>
+                    <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                        <GradientStop Color="White" Offset="0" />
+                        <GradientStop Color="#C8FFFFFF" Offset="1" />
+                    </LinearGradientBrush>
+                </TextBox.Background>
+            </TextBox>
+            <TextBox Grid.Row="2" HorizontalAlignment="Stretch" Name="textBox2" VerticalAlignment="Stretch">
+                <TextBox.Background>
+                    <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                        <GradientStop Color="White" Offset="0" />
+                        <GradientStop Color="#C8FFFFFF" Offset="1" />
+                    </LinearGradientBrush>
+                </TextBox.Background>
+            </TextBox>
+            <Border BorderThickness="0" Grid.Row="1" HorizontalAlignment="Stretch" Name="border1" VerticalAlignment="Stretch">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                        <GradientStop Color="#66FFFFFF" Offset="0" />
+                        <GradientStop Color="#C8FFFFFF" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+            <Border BorderThickness="0" HorizontalAlignment="Stretch" Name="border2" VerticalAlignment="Stretch" Grid.Row="3">
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="1,0.5" StartPoint="0,0.5">
+                        <GradientStop Color="#66FFFFFF" Offset="0" />
+                        <GradientStop Color="#C8FFFFFF" Offset="1" />
+                    </LinearGradientBrush>
+                </Border.Background>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>
